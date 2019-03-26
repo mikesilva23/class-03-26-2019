@@ -6,13 +6,29 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 
 library(tidyverse)
 library(gganimate)
+library(gt)
 ```
 
 ```{r}
-hartford <- read_rds("Hartford.rds")
+
+x <- read_rds("Hartford.rds")
+
+
+```
+The first day in the data `r x %>% arrange(date) %>% select(date) %>% slice(1)`
+
+```{r}
+x %>%
+  filter(arrest_made) %>%
+  group_by(subject_race, district) %>%
+  count() %>%
+  arrange(desc(n)) %>%
+  spread(key = subject_race, value = n) %>%
+  ungroup() %>%
+  gt() 
 ```
 
