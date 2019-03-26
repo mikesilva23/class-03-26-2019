@@ -13,6 +13,6 @@ library(gganimate)
 ```
 
 ```{r}
-
+hartford <- read_rds("Hartford.rds")
 ```
 
